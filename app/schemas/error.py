@@ -11,3 +11,8 @@ class Fault(BaseModel):
 
 class SearchRequestError(BaseModel):
     fault: Fault
+
+class SearchException(Exception):
+    def __init__(self, fault: Fault):
+        self.fault = fault
+        super().__init__(str(fault))

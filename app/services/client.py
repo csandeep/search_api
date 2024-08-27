@@ -1,7 +1,8 @@
 import httpx
 from app.config import settings
 from app.schemas.event import SearchResult
-from app.schemas.error import Fault, SearchRequestError
+from app.schemas.error import Fault, SearchException
+import json
 
 async def search_events(**kwargs) -> SearchResult:
     """
@@ -15,6 +16,9 @@ async def search_events(**kwargs) -> SearchResult:
     segment = kwargs.get("segment", None)
 
     if settings.TICKETMASTER_API_KEY is None:
-        raise Fault(faultString = "Missing TICKETMASTER_API_KEY.")
+        f =  Fault(faultstring="Missing TICKETMASTER_API_KEY.")
+        raise SearchException(fault = f)
+    
+    raise SearchException(fault = Fault(faultstring="Not Implementd"))
 
-    return SearchResult(links={}, page={}, embedded={})
+    return None
