@@ -8,6 +8,7 @@ fastapi = {extras = ["standard"], version = "*"}
 pytest = "*"
 httpx = "*"
 pydantic-settings = "*"
+trio = "*"
 
 [dev-packages]
 

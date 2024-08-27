@@ -1,19 +1,21 @@
 import pytest
-
 from fastapi.testclient import TestClient
-from httpx import AsyncClient
-
 from .api import app
 
+from .schemas.event import SearchResult
+from .schemas.error import SearchRequestError, ErrorResponseException
+from .services.client import search_events
 
 client = TestClient(app)
 
+@pytest.mark.anyio
+async def test_search_events():
+    response = await search_events(startDate="2024-10-01")
+    assert type(response) is SearchResult
+    assert len(response.events) == 10
 
-def test_search_events():
-    response = client.get("/search_events")
-    assert response.status_code == 200
-    assert response.json() == {
-        "id": "foo",
-        "title": "Foo",
-        "description": "There goes my hero",
-    }
+@pytest.mark.anyio
+async def test_search_invalid_event():
+    response = await search_events(city="unknown")
+    assert type(response) is SearchResult
+    assert response.embedded is None

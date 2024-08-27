@@ -148,7 +148,7 @@ class Page(BaseModel):
 
 class SearchResult(BaseModel):
     links: Links = Field(alias="_links")
-    embedded: Embedded = Field(alias="_embedded")
+    embedded: Embedded = Field(alias="_embedded", default=None)
     page: Page
 
     @property
