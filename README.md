@@ -22,4 +22,4 @@ pipenv run fastpai dev
 
 ### Documentation
 
-Once you `pipenv run fastapi dev` you can browse the api documentation at `http://127.0.0.1:8000/docs#/`
+Once you `pipenv run fastapi dev` you can browse the [swagger api documentation here](http://127.0.0.1:8000/docs#/)
