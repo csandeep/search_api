@@ -3,7 +3,7 @@ from fastapi.testclient import TestClient
 from .api import app
 
 from .schemas.event import SearchResult
-from .schemas.error import SearchRequestError, ErrorResponseException
+from .schemas.error import SearchRequestError
 from .services.client import search_events
 
 client = TestClient(app)
