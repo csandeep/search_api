@@ -129,11 +129,11 @@ class Event(BaseModel):
     embedded: EmbeddedEvent = Field(alias="_embedded")
 
     @property
-    def get_venues(self) -> List[Venue]:
+    def venues(self) -> List[Venue]:
         return self.embedded.venues
 
     @property
-    def get_attractions(self) -> List[Attraction]:
+    def attractions(self) -> List[Attraction]:
         return self.embedded.attractions
 
 
@@ -146,11 +146,11 @@ class Page(BaseModel):
     totalPages: int
     number: int
 
-class RootModel(BaseModel):
+class SearchResult(BaseModel):
     links: Links = Field(alias="_links")
     embedded: Embedded = Field(alias="_embedded")
     page: Page
 
     @property
-    def get_events(self) -> List[Event]:
+    def events(self) -> List[Event]:
         return self.embedded.events

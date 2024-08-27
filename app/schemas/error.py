@@ -1,3 +1,4 @@
+from typing import Optional
 from pydantic import BaseModel
 
 
@@ -6,7 +7,7 @@ class Detail(BaseModel):
 
 class Fault(BaseModel):
     faultstring: str
-    detail: Detail
+    detail: Optional[Detail] = None
 
-class TicketMasterError(BaseModel):
+class SearchRequestError(BaseModel):
     fault: Fault
