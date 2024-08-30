@@ -30,4 +30,4 @@ async def search_exception_handler(request: Request, exc: SearchException):
 async def search_events_handler(params: SearchParams = Depends()):
 
     res = await search_events(**params.model_dump())
-    return SearchResponse(events=res.events, page=res.page)
+    return SearchResponse(events=res.events if res.embedded else [], page=res.page)

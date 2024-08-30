@@ -154,7 +154,7 @@ class SearchResult(BaseModel):
     @property
     def events(self) -> List[Event]:
         return self.embedded.events
-    
+
 class SearchResponse(BaseModel):
     events: List[Event]
     page: Page
