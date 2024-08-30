@@ -2,7 +2,7 @@ from fastapi import FastAPI, Depends, Request
 from fastapi.responses import JSONResponse
 
 from .services.client import search_events
-from .schemas.event import SearchResult
+from .schemas.event import SearchResult, SearchResponse
 from .schemas.error import SearchException
 from .schemas.search_param import SearchParams
 
@@ -26,14 +26,8 @@ async def search_exception_handler(request: Request, exc: SearchException):
         content={"message": f"Oops! {exc.fault.faultstring}"},
     )
 
-@app.get("/search_events", response_model=SearchResult)
+@app.get("/search_events", response_model=SearchResponse)
 async def search_events_handler(params: SearchParams = Depends()):
 
-    res = await search_events(keyword=params.keyword,
-                              startDate=params.startDate,
-                              endDate=params.endDate,
-                              city=params.city,
-                              segment=params.segment,
-                              size=params.size,
-                              page=params.page)
-    return res
+    res = await search_events(**params.model_dump())
+    return SearchResponse(events=res.events, page=res.page)
