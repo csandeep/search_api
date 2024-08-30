@@ -12,7 +12,7 @@ class Links(BaseModel):
     venues: Optional[List[Link]] = None
 
 class Image(BaseModel):
-    ratio: str
+    ratio: Optional[str] = None
     url: str
     width: int
     height: int
@@ -38,7 +38,7 @@ class Status(BaseModel):
 
 class Dates(BaseModel):
     start: DateStart
-    timezone: str
+    timezone: Optional[str] = None
     status: Status
 
 class Segment(BaseModel):
@@ -96,7 +96,7 @@ class Venue(BaseModel):
     country: Country
     address: Address
     location: Location
-    markets: List[Market]
+    markets: Optional[List[Market]] = None
     links: Links = Field(alias="_links")
 
 class Attraction(BaseModel):
@@ -120,11 +120,11 @@ class Event(BaseModel):
     test: bool
     url: str
     locale: str
-    images: List[Image]
+    images: Optional[List[Image]]
     sales: PublicSales
-    dates: Dates
+    dates: Optional[Dates]
     classifications: List[Classification]
-    promoter: Promoter
+    promoter: Optional[Promoter] = None
     links: Links = Field(alias="_links")
     embedded: EmbeddedEvent = Field(alias="_embedded")
 
